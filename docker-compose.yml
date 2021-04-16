@@ -17,7 +17,7 @@ services:
     environment:
         SA_PASSWORD: "Jacksparrow@88"
         ACCEPT_EULA: "Y"
-        volumes: 
-          - mssql-server-linux-data:/var/opt/mssql/data
+    volumes: 
+      - sqlvolume:/var/opt/mssql
 volumes:
-  ssql-server-linux-data:
+  sqlvolume:
