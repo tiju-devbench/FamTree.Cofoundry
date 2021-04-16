@@ -9,6 +9,7 @@ resources:
 - repo: self
 
 variables:
+
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '8d9a568b-098f-4e8b-b1b1-26e42e0167d4'
   imageRepository: 'tijudevbenchfamtreecofoundry'
@@ -28,12 +29,11 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: Docker@2
+
+    - task: DockerCompose@0
       displayName: Build and push an image to container registry
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'tjazregistry'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Run a Docker Compose command'
